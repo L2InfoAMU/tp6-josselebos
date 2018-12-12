@@ -3,6 +3,8 @@ package model;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 
+
+
 /**
  * {@link Cell} instances represent the cells of <i>The Game of Life</i>.
  */
@@ -59,5 +61,7 @@ public class Cell {
     public Property<CellState> getStateProperty() {
         return stateProperty;
     }
+
+
 
 }

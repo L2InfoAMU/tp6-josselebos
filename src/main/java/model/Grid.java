@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -91,16 +92,31 @@ public class Grid implements Iterable<Cell> {
 
     // TODO: Écrire une version correcte de cette méthode.
     private List<Cell> getNeighbours(int rowIndex, int columnIndex) {
-        return null;
+        List<Cell> list = new ArrayList<>(8);
+        for(int i = rowIndex - 1 ; i<= rowIndex + 1 ; i++){
+            for(int j = columnIndex - 1 ; j <= columnIndex + 1 ; j++){
+                if (i != rowIndex || j != columnIndex)
+                    list.add(getCell(i,j));
+            }
+        }
+        return list;
     }
 
     // TODO: Écrire une version correcte de cette méthode.
     private int countAliveNeighbours(int rowIndex, int columnIndex) {
-        return 0;
+        int counter_cells_alives = 0;
+        for(Cell cell : getNeighbours(rowIndex,columnIndex)){
+            if (cell.isAlive())
+                counter_cells_alives ++;
+        }
+        return counter_cells_alives;
     }
 
     // TODO: Écrire une version correcte de cette méthode.
     private CellState calculateNextState(int rowIndex, int columnIndex) {
+        getNeighbours(rowIndex,columnIndex);
+        if(getCell(rowIndex,columnIndex).isAlive() && countAliveNeighbours(rowIndex,columnIndex)>=2)
+            return getCell(rowIndex,columnIndex).getStateProperty();
         return null;
     }
 
@@ -153,4 +169,5 @@ public class Grid implements Iterable<Cell> {
     void randomGeneration(Random random) {
 
     }
+
 }
